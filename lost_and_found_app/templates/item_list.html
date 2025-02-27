@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Lost & Found Items</h1>
+<a href="{% url 'item_create' %}" class="btn btn-primary mb-3">Add New Item</a>
+<ul class="list-group">
+    {% for item in items %}
+        <li class="list-group-item">
+            <a href="{% url 'item_detail' item.id %}">{{ item.title }}</a> ({{ item.status }})
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

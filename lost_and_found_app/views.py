@@ -39,10 +39,15 @@ def logout_view(request):
 
 @login_required
 def item_list(request):
+    query = request.GET.get('q')
     if request.user.is_staff:
         items = Item.objects.all()
     else:
         items = Item.objects.filter(is_approved=True)
+
+    if query:
+        items = items.filter(title__istartswith=query)
+
     return render(request, 'item_list.html', {'items': items})
 
 

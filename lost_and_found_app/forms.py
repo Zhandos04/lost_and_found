@@ -36,14 +36,12 @@ class ItemForm(forms.ModelForm):
             }
         }
 
-    # Валидация отдельного поля: заголовок должен содержать минимум 5 символов
     def clean_title(self):
         title = self.cleaned_data.get('title')
         if title and len(title) < 5:
             raise ValidationError("Title must be at least 5 characters long.")
         return title
 
-    # Общая валидация формы: для найденных предметов обязательное наличие описания
     def clean(self):
         cleaned_data = super().clean()
         status = cleaned_data.get('status')
@@ -51,14 +49,3 @@ class ItemForm(forms.ModelForm):
         if status == 'found' and (not description or description.strip() == ''):
             self.add_error('description', "Please provide additional details for found items.")
         return cleaned_data
-
-
-# Дополнительная форма для поиска (если понадобится более сложная логика)
-class ItemSearchForm(forms.Form):
-    q = forms.CharField(
-        required=False,
-        widget=forms.TextInput(attrs={
-            'class': 'form-control',
-            'placeholder': 'Search items...'
-        })
-    )

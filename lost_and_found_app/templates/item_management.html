@@ -1,0 +1,16 @@
+<!-- templates/item_management.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Управление предметами</h1>
+<p>Эта страница доступна только пользователям с правами на изменение предметов.</p>
+<ul class="list-group">
+    {% for item in items %}
+        <li class="list-group-item">
+            <a href="{% url 'item_detail' item.id %}">{{ item.title }}</a> ({{ item.status }})
+        </li>
+    {% empty %}
+        <li class="list-group-item">Нет доступных предметов.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

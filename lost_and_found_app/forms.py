@@ -4,11 +4,10 @@ from django import forms
 from django.core.exceptions import ValidationError
 from .models import Item
 
-
 class ItemForm(forms.ModelForm):
     class Meta:
         model = Item
-        fields = ['title', 'description', 'category', 'location', 'status']
+        fields = ['title', 'description', 'category', 'location', 'status', 'image']
         widgets = {
             'title': forms.TextInput(attrs={
                 'class': 'form-control',
@@ -25,6 +24,7 @@ class ItemForm(forms.ModelForm):
                 'placeholder': 'Enter location'
             }),
             'status': forms.Select(attrs={'class': 'form-control'}),
+            'image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
         }
         error_messages = {
             'title': {

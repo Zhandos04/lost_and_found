@@ -5,6 +5,9 @@
 <p><strong>Status:</strong> {{ item.status }}</p>
 <p><strong>Location:</strong> {{ item.location }}</p>
 <p><strong>Description:</strong> {{ item.description }}</p>
+{% if item.image %}
+    <img src="{{ item.image.url }}" alt="{{ item.title }}" style="max-width: 400px;">
+{% endif %}
 <a href="{% url 'item_update' item.id %}" class="btn btn-warning">Edit</a>
 <a href="{% url 'item_delete' item.id %}" class="btn btn-danger">Delete</a>
 {% endblock %}

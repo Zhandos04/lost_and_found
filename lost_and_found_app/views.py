@@ -2,7 +2,6 @@
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Item
 from .forms import ItemForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
@@ -10,16 +9,6 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render
 from django.contrib.auth.decorators import permission_required
 from .models import Item
-
-from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.views.generic import ListView
-from .models import Item
-
-class ItemManagementView(PermissionRequiredMixin, ListView):
-    permission_required = 'lost_and_found_app.change_item'
-    model = Item
-    template_name = 'item_management.html'
-    context_object_name = 'items'
 
 @permission_required('lost_and_found_app.change_item', raise_exception=True)
 def item_management(request):
